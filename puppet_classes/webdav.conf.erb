@@ -1,0 +1,24 @@
+DavLockDB /var/lib/dav/lockdb
+NameVirtualHost *:80
+<VirtualHost *:80>
+        ServerAdmin webmaster@localhost
+
+        DocumentRoot /var/www/iht/dav/
+        <Directory /var/www/iht/dav/>
+                Options Indexes MultiViews
+                AllowOverride None
+                Order allow,deny
+                allow from all
+        </Directory>
+
+        Alias /webdav /var/www/iht/dav
+
+        <Location /webdav>
+           DAV On
+           AuthType Basic
+           AuthName "webdav"
+           AuthUserFile /var/www/iht/passwd.dav
+           Require valid-user
+       </Location>
+
+</VirtualHost>
